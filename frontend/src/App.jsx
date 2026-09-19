@@ -5,8 +5,9 @@ import { LayoutDashboard, Map as MapIcon, Settings, Activity, LogOut } from 'luc
 import Dashboard from './pages/Dashboard';
 import MonitorArea from './pages/MonitorArea';
 import Analysis from './pages/Analysis';
-import LandingPage from './pages/LandingPage';
 import './App.css';
+
+const Welcome = React.lazy(() => import('./pages/Welcome'));
 
 // Axios Interceptor for Auth
 axios.interceptors.request.use(config => {
@@ -225,18 +226,40 @@ function MainLayout({ setAuth }) {
  );
 }
 
-function App() {
- const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return <div className="p-8 text-center text-danger">Something went wrong loading the landing page.</div>;
+    }
+    return this.props.children;
+  }
+}
 
- return (
- <BrowserRouter>
- <Routes>
- <Route path="/*" element={!isAuthenticated ? <LandingPage /> : <MainLayout setAuth={setIsAuthenticated} />} />
- <Route path="/login" element={!isAuthenticated ? <Login setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
- <Route path="/signup" element={!isAuthenticated ? <Signup setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
- </Routes>
- </BrowserRouter>
- );
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={!isAuthenticated ? (
+          <ErrorBoundary>
+            <React.Suspense fallback={<div className="flex h-screen items-center justify-center bg-bg text-text">Loading...</div>}>
+              <Welcome />
+            </React.Suspense>
+          </ErrorBoundary>
+        ) : <MainLayout setAuth={setIsAuthenticated} />} />
+        <Route path="/login" element={!isAuthenticated ? <Login setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
+        <Route path="/signup" element={!isAuthenticated ? <Signup setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
