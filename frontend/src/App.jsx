@@ -209,7 +209,7 @@ function MainLayout({ setAuth }) {
  return (
  <div className="flex h-screen bg-successg text-text overflow-hidden font-sans relative">
  {/* Immersive background overlay */}
- <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2000')] bg-cover bg-center opacity-30 pointer-events-none"></div>
+ <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2000')] bg-cover bg-center opacity-[0.25] mix-blend-luminosity pointer-events-none"></div>
  
  <Sidebar setAuth={setAuth} />
  <main className="flex-1 flex flex-col h-full overflow-hidden relative">
