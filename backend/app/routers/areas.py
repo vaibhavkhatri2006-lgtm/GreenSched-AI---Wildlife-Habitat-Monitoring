@@ -18,7 +18,7 @@ def create_area(area: MonitoringAreaCreate, db: Session = Depends(get_db), curre
 
 @router.get("/", response_model=List[MonitoringAreaResponse])
 def get_areas(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    areas = db.query(MonitoringArea).filter(MonitoringArea.user_id == current_user.id).all()
+    areas = db.query(MonitoringArea).filter(MonitoringArea.user_id == current_user.id).order_by(MonitoringArea.created_at.desc()).all()
     return areas
 
 @router.get("/{area_id}", response_model=MonitoringAreaResponse)

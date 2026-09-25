@@ -5,9 +5,8 @@ import { LayoutDashboard, Map as MapIcon, Settings, Activity, LogOut } from 'luc
 import Dashboard from './pages/Dashboard';
 import MonitorArea from './pages/MonitorArea';
 import Analysis from './pages/Analysis';
+import LandingPage from './pages/LandingPage';
 import './App.css';
-
-const Welcome = React.lazy(() => import('./pages/Welcome'));
 
 // Axios Interceptor for Auth
 axios.interceptors.request.use(config => {
@@ -209,7 +208,7 @@ function MainLayout({ setAuth }) {
  return (
  <div className="flex h-screen bg-successg text-text overflow-hidden font-sans relative">
  {/* Immersive background overlay */}
- <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2000')] bg-cover bg-center opacity-[0.25] mix-blend-luminosity pointer-events-none"></div>
+ <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2000')] bg-cover bg-center opacity-30 pointer-events-none"></div>
  
  <Sidebar setAuth={setAuth} />
  <main className="flex-1 flex flex-col h-full overflow-hidden relative">
@@ -226,40 +225,18 @@ function MainLayout({ setAuth }) {
  );
 }
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-  render() {
-    if (this.state.hasError) {
-      return <div className="p-8 text-center text-danger">Something went wrong loading the landing page.</div>;
-    }
-    return this.props.children;
-  }
-}
-
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+ const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={!isAuthenticated ? (
-          <ErrorBoundary>
-            <React.Suspense fallback={<div className="flex h-screen items-center justify-center bg-bg text-text">Loading...</div>}>
-              <Welcome />
-            </React.Suspense>
-          </ErrorBoundary>
-        ) : <MainLayout setAuth={setIsAuthenticated} />} />
-        <Route path="/login" element={!isAuthenticated ? <Login setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
-        <Route path="/signup" element={!isAuthenticated ? <Signup setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+ return (
+ <BrowserRouter>
+ <Routes>
+ <Route path="/*" element={!isAuthenticated ? <LandingPage /> : <MainLayout setAuth={setIsAuthenticated} />} />
+ <Route path="/login" element={!isAuthenticated ? <Login setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
+ <Route path="/signup" element={!isAuthenticated ? <Signup setAuth={setIsAuthenticated} /> : <Navigate to="/" />} />
+ </Routes>
+ </BrowserRouter>
+ );
 }
 
 export default App;

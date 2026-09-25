@@ -96,10 +96,10 @@ export default function Analysis() {
  <div className="space-y-3">
  <div>
  <label className="block text-xs text-text-secondary mb-1">Monitoring Area</label>
- <select 
- className="w-full bg-surface-1 border border-successorder rounded-md px-3 py-2 text-sm text-text"
- value={selectedAreaId} onChange={(e) => setSelectedAreaId(e.target.value)}
- >
+  <select 
+    className="w-full bg-[#0a0f0d] border border-white/10 rounded-md px-3 py-2 text-sm text-slate-200 outline-none focus:border-[#F4C430] transition-colors"
+    value={selectedAreaId} onChange={(e) => setSelectedAreaId(e.target.value)}
+  >
  <option value="" disabled>
  {areas.length === 0 ?"No areas saved. Go to Monitor Area first." :"Select an area..."}
  </option>

@@ -5,6 +5,7 @@ import { Map as MapIcon, TreePine, Activity, AlertTriangle, TrendingUp } from 'l
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend } from 'recharts';
 import DepthCarousel from '../components/DepthCarousel';
 
+
 function KPICard({ title, value, icon, trend, trendUp, trendDown, alert }) {
  return (
  <div className={`glass-panel p-5 rounded-2xl border ${alert ? 'border-danger/30 bg-danger/5' : 'border-successorder'} glass-panel-hover group overflow-hidden relative`}>
@@ -51,12 +52,12 @@ export default function Dashboard() {
  const viewAnalysis = (id) => {
  navigate(`/analysis?id=${id}`);
  };
-
+ 
  const carouselItems = [
- { image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=800', alt: 'Tiger' },
- { image: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=800', alt: 'Dark Forest' },
- { image: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=800', alt: 'Leopard' },
- { image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=800', alt: 'Sea Turtle' }
+   { image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=800', alt: 'Tiger' },
+   { image: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=800', alt: 'Dark Forest' },
+   { image: 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?q=80&w=800', alt: 'Leopard' },
+   { image: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=800', alt: 'Sea Turtle' }
  ];
 
  return (

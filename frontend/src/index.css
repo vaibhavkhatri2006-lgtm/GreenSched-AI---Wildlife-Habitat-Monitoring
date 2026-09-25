@@ -1,141 +1,143 @@
-@import"tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;600;700&display=swap');
 
 @theme {
- --color-bg: #0B1410;
- --color-surface-1: #101C16;
- --color-surface-2: #16261E;
- --color-surface-3: #1D3227;
- --color-border: rgba(234,241,232,0.10);
- --color-border-strong: rgba(234,241,232,0.18);
- 
- --color-text: #EAF1E8;
- --color-text-secondary: #A9BBAE;
- --color-text-muted: #7F9486;
- 
- --color-accent: #F2C230;
- --color-on-accent: #1A1405;
- --color-accent-soft: rgba(242,194,48,0.12);
- 
- --color-success: #3FA76A;
- --color-danger: #EF4444;
- --color-warning: #F2C230;
- --color-info: #22B8CF;
-
- --color-vegetation: #3FA76A;
- --color-vegetation-loss: #F07A3C;
- --color-urban: #8B5CF6;
- --color-water: #22B8CF;
- --color-protected: #1F9D6B;
- --color-critical: #EF4444;
- 
- --font-heading: 'Bricolage Grotesque', system-ui, sans-serif;
- --font-body: 'Inter Tight', system-ui, sans-serif;
- --font-mono: 'JetBrains Mono', monospace;
+  --color-primary: #F4C430; /* Golden Amber */
+  --color-primary-dark: #d4a720;
+  --color-primary-light: #f6d260;
+  --color-secondary: #1D3B34; /* Emerald Teal */
+  --color-dark: #0a0f0d; /* Deep Forest Charcoal */
+  --color-darker: #060908; 
+  --color-dark-panel: rgba(15, 23, 21, 0.45);
+  --color-text: #f8fafc;
+  --color-text-muted: #94A8A0;
+  --color-alert: #ef4444;
+  --color-warning: #f59e0b;
 }
 
 :root {
- font-family: var(--font-body);
- line-height: 1.5;
- font-weight: 400;
- color: var(--color-text);
- background-color: var(--color-bg);
- font-synthesis: none;
- text-rendering: optimizeLegibility;
- -webkit-font-smoothing: antialiased;
- -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-dark);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
- font-family: var(--font-heading);
- letter-spacing: normal;
- text-transform: none;
-}
-
-.tiny-label {
- font-size: 11px;
- letter-spacing: 0.08em;
- text-transform: ;
- font-family: var(--font-body);
-}
-
-.tabular-nums {
- font-family: var(--font-mono);
- font-variant-numeric: tabular-nums;
+  font-family: 'Oswald', system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 body {
- margin: 0;
- min-width: 320px;
- min-height: 100vh;
- background-color: var(--color-bg);
- color: var(--color-text);
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-dark);
+  color: var(--color-text);
 }
 
+/* Glassmorphism Panels 2.0 */
 .glass-panel {
- background: var(--color-surface-1);
- border: 1px solid var(--color-border);
- border-radius: 12px;
+  background: var(--color-dark-panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel-hover:hover {
- background: var(--color-surface-2);
- border: 1px solid var(--color-border-strong);
- transform: translateY(-2px);
- transition: all 0.3s ease;
+  background: rgba(29, 59, 52, 0.4);
+  border: 1px solid rgba(244, 196, 48, 0.4);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
- width: 6px;
- height: 6px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
- background: var(--color-bg);
+  background: var(--color-darker);
 }
 ::-webkit-scrollbar-thumb {
- background: var(--color-surface-3);
- border-radius: 4px;
+  background: rgba(148, 168, 160, 0.3);
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
- background: var(--color-text-muted);
+  background: rgba(244, 196, 48, 0.5);
+}
+
+/* Radar Animation */
+@keyframes radar-ping {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+.radar-dot {
+  position: relative;
+}
+.radar-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 /* Leaflet Map Customizations */
 .leaflet-container {
- background: var(--color-bg) !important;
- font-family: var(--font-body) !important;
+  background: var(--color-darker) !important;
+  font-family: 'Inter', sans-serif !important;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
- background: var(--color-surface-1) !important;
- color: var(--color-text) !important;
- border: 1px solid var(--color-border-strong);
+  background: rgba(15, 23, 21, 0.95) !important;
+  backdrop-filter: blur(10px);
+  color: var(--color-text) !important;
+  border: 1px solid rgba(244, 196, 48, 0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
 }
 .leaflet-popup-content {
- margin: 12px !important;
+  margin: 12px !important;
 }
 .leaflet-bar a {
- background-color: var(--color-surface-2) !important;
- color: var(--color-text) !important;
- border-color: var(--color-border) !important;
+  background-color: rgba(15, 23, 21, 0.8) !important;
+  color: var(--color-text) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(8px);
 }
 .leaflet-bar a:hover {
- background-color: var(--color-surface-3) !important;
+  background-color: var(--color-primary) !important;
+  color: #0a0f0d !important;
 }
 
+/* Primary Button Override */
 .btn-primary {
- background-color: var(--color-accent);
- color: var(--color-on-accent);
- font-weight: 600;
- transition: all 0.2s ease;
- border-radius: 8px;
- padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-darker);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
 }
 .btn-primary:hover:not(:disabled) {
- filter: brightness(1.1);
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(244, 196, 48, 0.3);
 }
 .btn-primary:disabled {
- opacity: 0.5;
- cursor: not-allowed;
- background-color: var(--color-surface-3);
- color: var(--color-text-muted);
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--color-text-muted);
 }
